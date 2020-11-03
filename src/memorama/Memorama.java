@@ -16,6 +16,8 @@ public class Memorama {
      */
     public static void main(String[] args) {
         System.out.println("");
+        Ventana nuevo = new Ventana();
+        nuevo.go();
     }
 
 }

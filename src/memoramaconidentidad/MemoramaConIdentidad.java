@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package memorama;
+package memoramaconidentidad;
 
 /**
  *
- * @author pablo
+ * @author LABIAALAP1
  */
-public class Memorama {
+public class MemoramaConIdentidad {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("");
-        Ventana nuevo = new Ventana();
-        nuevo.go();
+        new Tablero();
     }
-
+    
 }

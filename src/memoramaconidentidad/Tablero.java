@@ -19,18 +19,18 @@ import javax.swing.JPanel;
 public class Tablero extends JFrame {
     private final BotonIdentidad[] botones;
     private final JPanel panelBotones;
-    private final String[] simbolos = {"Escudo", "Estandarte", "Bandera",
-                                       "Lema", "Himno", "EstandarteICL",
-                                       "EstandarteICLAEdoMex", "ArbolMora",
-                                       "EdificioCentralRectoria",
-                                       "AulaMagnaLicAdolfoLopezMateos",
-                                       "MuralSintesis", "MonumentoMaestros",
-                                       "CerroCoatepec",
-                                       "MonumentoMemoriaAdolfoLopezMateos",
-                                       "MonumentoAutonomiaUniversitaria",
-                                       "ColoresVerdeOro",
-                                       "ContingenteCivicoDeportivoUniversitario",
-                                       "ParticularesAdministracionUniversitaria"}; 
+    private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
+                                       "A4_Lema", "A5_Himno", "B1_EstandarteICL",
+                                       "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
+                                       "C2_Edificio",
+                                       "C3_AulaMagna",
+                                       "C4_MuralSint", "C5_MonuMaes",
+                                       "C6_Cerro",
+                                       "C7_MoniAdolf",
+                                       "C8_MonuAutono",
+                                       "C9_Colores",
+                                       "C10_Contigente",
+                                       "C11_Particulares"}; 
     private final int []acomodoPredeterminado = {0, 1, 2, 17, 16, 15, 3, 4, 5,
                          14, 13, 12, 6, 7, 8, 11, 10, 9,
                          9, 10, 11, 8, 7, 6, 12, 13, 14,

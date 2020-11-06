@@ -19,7 +19,7 @@ public class BotonIdentidad extends JButton implements ActionListener {
     private boolean destapado;
     public BotonIdentidad(String simbolo) {
         super();
-        setIcon(new ImageIcon("simbolos/SimbolosUniversitarios.png"));
+        setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
         this.simbolo = simbolo;
         destapado = false;
         addActionListener(this);
@@ -33,7 +33,7 @@ public class BotonIdentidad extends JButton implements ActionListener {
         }            
         else {
             destapado = false;
-            setIcon(new ImageIcon("simbolos/SimbolosUniversitarios.png"));
+            setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
         }
     }
 }

@@ -27,7 +27,7 @@ import javax.swing.JTextPane;
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
-    private  final BotonIdentidad[] botones;
+    private static BotonIdentidad[] botones;
     private final JPanel panelBotones;
     private final JPanel puntaje;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
@@ -63,9 +63,9 @@ public class Tablero extends JFrame {
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
             //para un acomodo predeterminado
-            //botones[i] = new BotonIdentidad(simbolos[acomodoPredeterminado[i]]);
+            botones[i] = new BotonIdentidad(simbolos[acomodoPredeterminado[i]]);
             //para un acomodo al azar
-            botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
+            //botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
             panelBotones.add(botones[i]);
         }
         JPanel xd = new JPanel();
@@ -114,7 +114,7 @@ public class Tablero extends JFrame {
             }
         }
     }
-    
+     
     public void generaAcomodoAzar2() {
         int i, j, valor;
         for(i = 0; i < 36; i++) {
@@ -166,10 +166,16 @@ public class Tablero extends JFrame {
     }
     
      
-    public static void nombreBotones() {
+    public static void inmoviliza(String simbolo) {
         
-        //for(BotonIdentidad b: botones)
-        //System.out.println(b.getName());
+        for(BotonIdentidad b:botones){
+            if(b.getSimbolo() == simbolo) {
+                b.setInmovil(true);
+            }
+        }
     }
+    
+
+    
 }
 

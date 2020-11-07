@@ -29,17 +29,32 @@ public class BotonIdentidad extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) { 
-        Validar.compara(destapado, simbolo);
+
+        if(Validar.compara(destapado, simbolo)){
+            Tablero.inmoviliza(simbolo);
+        }        
         if(!destapado) {
             destapado = true;
             setIcon(new ImageIcon("simbolos/" + simbolo +".png"));
         }            
         else {
+                if(!inmovil){
                 destapado = false;
                 setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
+                }
         }
+    }  
+
+    public String getSimbolo() {
+        return simbolo;
     }
 
-    
+    public boolean isInmovil() {
+        return inmovil;
+    }
+
+    public void setInmovil(boolean inmovil) {
+        this.inmovil = inmovil;
+    }
     
 }

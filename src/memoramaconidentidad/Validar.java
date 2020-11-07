@@ -19,7 +19,8 @@ public class Validar {
         String[] inmoviles = new String[18];
     }
     
-    public static void compara(boolean destapado, String simbolo){
+    public static boolean compara(boolean destapado, String simbolo){
+        boolean comparar = false;
         if(!destapado){
             if(temp1==null){
                 temp1 = simbolo;
@@ -33,16 +34,18 @@ public class Validar {
         if(temp1 !=null && temp2 != null){
             if(temp1 == temp2) {
                 System.out.println("Iguales");
-                inmovilizar(temp1);
+                comparar = true;
             }
             temp1 = null;
             temp2 = null;
         }
         }
+        return comparar;
     }
     
-    public static void inmovilizar(String simbolo) {
-        int cont = 0;
+    public static boolean inmovilizar(String simbolo) {
+        boolean inmovil=true;
+        try{
         if(inmoviles.length > 0) {            
             inmoviles[inmoviles.length + 1] = simbolo;
         }
@@ -52,6 +55,8 @@ public class Validar {
         for(String i:inmoviles){
             System.out.println(i + " esta inmovil");
         }
+        }catch(NullPointerException e){}
+        return inmovil;
         
     }
     

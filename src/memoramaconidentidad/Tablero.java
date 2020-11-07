@@ -5,12 +5,22 @@
  */
 package memoramaconidentidad;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -19,6 +29,7 @@ import javax.swing.JPanel;
 public class Tablero extends JFrame {
     private final BotonIdentidad[] botones;
     private final JPanel panelBotones;
+    private final JPanel puntaje;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
                                        "A4_Lema", "A5_Himno", "B1_EstandarteICL",
                                        "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
@@ -39,10 +50,16 @@ public class Tablero extends JFrame {
     private final int[] acomodoAzar = new int[36];
     
     public Tablero() {
+        Font font = new Font("Verdana", Font.BOLD, 12);
         int i;
+        JTextPane ta = new JTextPane();
+        this.setLayout(new CardLayout());
+        puntaje = new JPanel();
+        puntaje.setSize(800, 100);
+        puntaje.setBackground(Color.red);
         botones = new BotonIdentidad[36];
         panelBotones = new JPanel();
-        panelBotones.setLayout(new GridLayout(6, 6, 2, 2));
+        panelBotones.setLayout(new GridLayout(7, 6, 2, 2));
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
             //para un acomodo predeterminado
@@ -51,10 +68,33 @@ public class Tablero extends JFrame {
             botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
             panelBotones.add(botones[i]);
         }
+        JPanel xd = new JPanel();
+        JPanel xd2 = new JPanel();
+        JPanel xd3 = new JPanel();
+        JPanel xd4 = new JPanel();
+        panelBotones.add(ta);
+        ta.setText("\n\n:O");
+        ta.setFont(font);
+        ta.setForeground(Color.white);
+        ta.setBackground(Color.BLUE);
+        
+        JTextPane ta2 = new JTextPane();
+                panelBotones.add(xd);
+                panelBotones.add(xd2);
+                panelBotones.add(xd3);
+                panelBotones.add(xd4);
+        panelBotones.add(ta2);      
+        ta2.setText("xdd");
+        ta2.setBackground(Color.red);
+
+        
+        
         addWindowListener(new CierraVentana());
-        getContentPane().add("Center", panelBotones);
-        setSize(800, 700);
+        this.add(panelBotones);
+        this.pack();
+        setSize(800, 750);
         setVisible(true);
+        
     }
     
     public void generaAcomodoAzar1() {

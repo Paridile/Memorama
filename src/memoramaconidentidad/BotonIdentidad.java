@@ -15,8 +15,10 @@ import javax.swing.JButton;
  * @author LABIAALAP1
  */
 public class BotonIdentidad extends JButton implements ActionListener {
+    private boolean inmovil;
     private String simbolo;
     private boolean destapado;
+
     public BotonIdentidad(String simbolo) {
         super();
         setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
@@ -26,14 +28,18 @@ public class BotonIdentidad extends JButton implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { 
+        Validar.compara(destapado, simbolo);
         if(!destapado) {
             destapado = true;
             setIcon(new ImageIcon("simbolos/" + simbolo +".png"));
         }            
         else {
-            destapado = false;
-            setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
+                destapado = false;
+                setIcon(new ImageIcon("simbolos/Carta_Volteada.png"));
         }
     }
+
+    
+    
 }

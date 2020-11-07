@@ -15,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Button;
-import java.awt.TextArea;
-import javax.swing.JLabel;
 
 /**
  *
@@ -24,11 +22,10 @@ import javax.swing.JLabel;
  */
 public class Tablero extends JFrame {
     private final BotonIdentidad[] botones;
-    private final JPanel panelBotones, panelJugadores;
+    private final JPanel panelBotones,panelJ1, panelJ2;
     private final JFrame f;
-    private final JLabel j1, j2, espacio;
-    private final TextArea t1, t2;
-    private final Button boton1;
+    
+    private final Button boton1, boton, prueba;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
                                        "A4_Lema", "A5_Himno", "B1_EstandarteICL",
                                        "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
@@ -41,6 +38,11 @@ public class Tablero extends JFrame {
                                        "C9_Colores",
                                        "C10_Contigente",
                                        "C11_Particulares"}; 
+    
+    private final String[] playerOne = {"JugadorUno"};
+    
+    private final String[] playerDos = {"JugadorDos"};
+    
     private final int []acomodoPredeterminado = {0, 1, 2, 17, 16, 15, 3, 4, 5,
                          14, 13, 12, 6, 7, 8, 11, 10, 9,
                          9, 10, 11, 8, 7, 6, 12, 13, 14,
@@ -52,9 +54,12 @@ public class Tablero extends JFrame {
         int i;
         botones = new BotonIdentidad[36];
         panelBotones = new JPanel();
-        panelJugadores = new JPanel();
+        panelJ1 = new JPanel();
+        panelJ2 = new JPanel();
         f = new JFrame("Ayuda diosito ya no me sale semen");
-        boton1 = new Button("XD");
+        boton1 = new Button("Jugador 1");
+        boton = new Button("Jugador 2");
+        prueba = new Button("Pruebitas");
         panelBotones.setLayout(new GridLayout(6, 6, 2, 2));
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
@@ -67,19 +72,18 @@ public class Tablero extends JFrame {
         //getContentPane().add("Center", panelBotones);
         panelBotones.setSize(800, 700);
         panelBotones.setVisible(true);
-        j1 = new JLabel("Jugador 1");
         
-        espacio = new JLabel("      ");
-        j2 = new JLabel("Jugador 2");
-       
-        panelJugadores.add(j1, BorderLayout.WEST);
+        panelJ1.add(boton1, BorderLayout.NORTH);
+        panelJ1.setSize(100, 700);
+        panelJ1.setVisible(true);
         
-        panelJugadores.add(espacio, BorderLayout.CENTER);
+        panelJ2.add(boton, BorderLayout.NORTH);
+        panelJ2.setSize(100, 700);
+        panelJ2.setVisible(true);
         
-        panelJugadores.add(j2, BorderLayout.EAST);
-        
-        f.add(panelBotones, BorderLayout.NORTH);
-        f.add(panelJugadores, BorderLayout.CENTER);
+        f.add(panelJ1, BorderLayout.WEST);
+        f.add(panelBotones, BorderLayout.CENTER);
+        f.add(panelJ2, BorderLayout.EAST);
         /*addWindowListener(new CierraVentana());
         getContentPane().add("Center", panelBotones);
         setSize(800, 700);
@@ -87,7 +91,7 @@ public class Tablero extends JFrame {
         
         f.pack();
 
-        f.setSize(900,900);
+        f.setSize(1000,850);
         f.setVisible(true);
         f.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent we){

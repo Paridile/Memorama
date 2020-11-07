@@ -175,7 +175,28 @@ public class Tablero extends JFrame {
         }
     }
     
+    
+    public static boolean diferentes() {
+       int i=0;
+       boolean impar=false;
+       for(BotonIdentidad b:botones){
+            if(!b.isInmovil() && b.isDestapado()) {
+                i++;
+            }
+            
+        }
+        if(i>=2){
+            for(BotonIdentidad b:botones){
+            if(!b.isInmovil() && b.isDestapado()) {
+                b.tapar();
+                impar=true;
+            }
+            
+        }
 
+        }
+            return impar;    
+    }
     
 }
 

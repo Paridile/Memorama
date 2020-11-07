@@ -5,75 +5,99 @@
  */
 package memoramaconidentidad;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author pablo
  */
 public class Validar {
     private int cantidadInmovilizados;
+    private static BotonIdentidad b1;
+    private static BotonIdentidad b2;
     private static String temp1;
     private static String temp2;
-    private static String[] inmoviles;
+    private static boolean flag;
+    private static int count;
     
     public Validar() {
-        String[] inmoviles = new String[18];
+        count=0;
+        flag=false;
     }
-    
-    public static boolean compara(boolean destapado, String simbolo){
-        boolean comparar = false;
-        if(!destapado){
-            if(temp1==null){
-                temp1 = simbolo;
-                System.out.println("Temp1 = " + temp1);
-            }
-        else if(temp2 == null) {
-            temp2 = simbolo;
-            System.out.println("Temp2 = " + temp2);
-        }
         
-        if(temp1 !=null && temp2 != null){
-            if(temp1 == temp2) {
-                System.out.println("Iguales");
-                comparar = true;
-            }
-            temp1 = null;
-            temp2 = null;
-        }
-        }
-        return comparar;
-    }
-    
-    public static boolean inmovilizar(String simbolo) {
-        boolean inmovil=true;
-        try{
-        if(inmoviles.length > 0) {            
-            inmoviles[inmoviles.length + 1] = simbolo;
-        }
-        else{
-            inmoviles[0] = simbolo;
-        }
-        for(String i:inmoviles){
-            System.out.println(i + " esta inmovil");
-        }
-        }catch(NullPointerException e){}
-        return inmovil;
-        
-    }
-    
-    
-    public String getTemp1() {
+    public static String getTemp1() {
         return temp1;
     }
 
-    public void setTemp1(String temp1) {
-        this.temp1 = temp1;
+    public static void setTemp1(String temp1) {
+        Validar.temp1 = temp1;
     }
 
-    public String getTemp2() {
+    public static String getTemp2() {
         return temp2;
     }
 
-    public void setTemp2(String temp2) {
-        this.temp2 = temp2;
+    public static void setTemp2(String temp2) {
+        Validar.temp2 = temp2;
     }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Validar.count = count;
+    }
+    
+    public static void voltea() throws InterruptedException {
+        Validar.setCount(Validar.getCount()+1);
+        if(Validar.getCount() == 2){
+        Validar.setCount(0);
+                Thread.sleep(1000);
+             Tablero.diferentes();
+        }
+                   
+    }
+    
+    public static boolean comparaCasillas() {
+        boolean iguales = false;
+        if(b1.getSimbolo().equals(b2.getSimbolo())) {
+            System.out.println("Iguales");
+            b1.setInmovil(true);
+            b2.setInmovil(true);
+        }
+        else{    
+                iguales = true;
+        }
+        return iguales;
+    }
+
+    public static boolean isFlag() {
+        return flag;
+    }
+
+    public static void setFlag(boolean flag) {
+        Validar.flag = flag;
+    }
+    
+    
+
+    public static BotonIdentidad getB1() {
+        return b1;
+    }
+
+    public static void setB1(BotonIdentidad b1) {
+        Validar.b1 = b1;
+    }
+
+    public static BotonIdentidad getB2() {
+        return b2;
+    }
+
+    public static void setB2(BotonIdentidad b2) {
+        Validar.b2 = b2;
+    }
+    
+    
+    
 }

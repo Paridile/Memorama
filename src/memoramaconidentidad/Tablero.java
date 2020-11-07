@@ -27,7 +27,7 @@ import javax.swing.JTextPane;
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
-    private final BotonIdentidad[] botones;
+    private  final BotonIdentidad[] botones;
     private final JPanel panelBotones;
     private final JPanel puntaje;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
@@ -164,4 +164,12 @@ public class Tablero extends JFrame {
             System.exit(0);
 	}
     }
+    
+     
+    public static void nombreBotones() {
+        
+        //for(BotonIdentidad b: botones)
+        //System.out.println(b.getName());
+    }
 }
+

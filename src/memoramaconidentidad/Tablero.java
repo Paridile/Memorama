@@ -15,17 +15,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
+    private static BotonIdentidad b1;
+    private static BotonIdentidad b2;
+    private int puntaje=0;
     private final BotonIdentidad[] botones;
-    private final JPanel panelBotones,panelJ1, panelJ2;
+    private final JPanel panelBotones, panelJu;
     private final JFrame f;
-    
-    private final Button boton1, boton, prueba;
+    private final JLabel labelJ1, labelJ2, espacio, labelP1, labelP2;
+    private final JButton boton1, boton, prueba;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
                                        "A4_Lema", "A5_Himno", "B1_EstandarteICL",
                                        "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
@@ -54,13 +62,26 @@ public class Tablero extends JFrame {
         int i;
         botones = new BotonIdentidad[36];
         panelBotones = new JPanel();
-        panelJ1 = new JPanel();
-        panelJ2 = new JPanel();
+        
+        panelJu = new JPanel();
+        panelJu.setLayout(new BoxLayout(panelJu,BoxLayout.Y_AXIS));
+        panelJu.setBounds(50, 50, 300, 700);
+        labelJ1 = new JLabel("Jugador 1");
+        labelJ2 = new JLabel("Jugador 2");
+        labelP1 = new JLabel("0");
+        labelP2 = new JLabel("0");
+        espacio = new JLabel("      ");
+        
+        
         f = new JFrame("Ayuda diosito ya no me sale semen");
-        boton1 = new Button("Jugador 1");
-        boton = new Button("Jugador 2");
-        prueba = new Button("Pruebitas");
+        boton1 = new JButton("Contador: ");
+        boton1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        boton = new JButton("Contador: ");
+        boton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        prueba = new JButton("Pruebitas");
         panelBotones.setLayout(new GridLayout(6, 6, 2, 2));
+        
+        
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
             //para un acomodo predeterminado
@@ -73,23 +94,41 @@ public class Tablero extends JFrame {
         panelBotones.setSize(800, 700);
         panelBotones.setVisible(true);
         
-        panelJ1.add(boton1, BorderLayout.NORTH);
-        panelJ1.setSize(100, 700);
-        panelJ1.setVisible(true);
         
-        panelJ2.add(boton, BorderLayout.NORTH);
-        panelJ2.setSize(100, 700);
-        panelJ2.setVisible(true);
+        labelJ1.setBounds(30, 10, 200, 30);
+        labelJ1.setFont(new Font("cooper black",0,30));
+        labelJ1.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        f.add(panelJ1, BorderLayout.WEST);
+        labelP1.setBounds(30, 10, 300, 30);
+        labelP1.setFont(new Font("cooper black",0,30));
+        labelP1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        espacio.setBounds(30, 10, 300, 30);
+        espacio.setFont(new Font("cooper black",0,30));
+        espacio.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        labelJ2.setBounds(30, 30, 500, 30);
+        labelJ2.setFont(new Font("cooper black",0,30));
+        labelJ2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        labelP2.setBounds(30, 10, 300, 30);
+        labelP2.setFont(new Font("cooper black",0,30));
+        labelP2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        panelJu.add(labelJ1);
+        panelJu.add(labelP1);
+        
+        panelJu.add(espacio);
+        
+        panelJu.add(labelJ2);
+        panelJu.add(labelP2);
+        //panelJu.setSize(300, 700);
+        panelJu.setVisible(true);
+        
         f.add(panelBotones, BorderLayout.CENTER);
-        f.add(panelJ2, BorderLayout.EAST);
-        /*addWindowListener(new CierraVentana());
-        getContentPane().add("Center", panelBotones);
-        setSize(800, 700);
-        setVisible(true);*/
+        f.add(panelJu, BorderLayout.EAST);
         
-        f.pack();
+        //f.pack();
 
         f.setSize(1000,850);
         f.setVisible(true);
@@ -98,6 +137,20 @@ public class Tablero extends JFrame {
                 System.exit(0);
             }
         });
+    }
+    
+    public void contador(){
+        boolean iguales = false;
+        if(b1.getSimbolo().equals(b2.getSimbolo())) {
+            System.out.println("Iguales");
+            b1.setInmovil(true);
+            b2.setInmovil(true);
+            puntaje+=10;
+            labelP1.setText(puntaje+"");
+        }
+        else{    
+                iguales = true;
+        }
     }
     
     public void generaAcomodoAzar1() {

@@ -16,6 +16,7 @@ import javax.swing.JButton;
  */
 public class BotonIdentidad extends JButton implements ActionListener {
     private String simbolo;
+    private boolean inmovil;
     private boolean destapado;
     public BotonIdentidad(String simbolo) {
         super();
@@ -23,6 +24,18 @@ public class BotonIdentidad extends JButton implements ActionListener {
         this.simbolo = simbolo;
         destapado = false;
         addActionListener(this);
+    }
+    
+    public String getSimbolo() {
+        return simbolo;
+    }
+    
+    public boolean isInmovil() {
+        return inmovil;
+    }
+    
+        public void setInmovil(boolean inmovil) {
+        this.inmovil = inmovil;
     }
 
     @Override

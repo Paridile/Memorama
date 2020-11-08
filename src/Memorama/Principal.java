@@ -2,31 +2,32 @@ package Memorama;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 
 
 public class Principal extends WindowAdapter implements ActionListener{
     private Frame f;//---------------------------------------------------VENTANA
     private MenuBar mb;//------------------------------------------BARRA DE MENU
-    private Label LTitulo; 
     
     private Menu m1;//-----------------------------------------PESTAÑA 1:JUEGO
     private Menu m2;//-----------------------------------------PESTAÑA 2:AYUDA
 //------------------------------------------------------------------------------BOTONES DE LA PESTAÑA 1: JUEGO
     private MenuItem juegoNuevo;
     private MenuItem nuevaVentana;
+    private MenuItem puntajes;
     private MenuItem salir;
 //------------------------------------------------------------------------------BOTONES DE LA PESTAÑA 2: AYUDA  
     private MenuItem verAyuda;
     private MenuItem enviarComentarios;
-    private MenuItem acercaDelJuego;            
+    private MenuItem acercaDelJuego;   
+    
 //------------------------------------------------------------------------------MAIN DE EJECUCIÓN
   public static void main (String args[]) {
     Principal Traer1 = new Principal();
     Traer1.go();
   }
+  
+  
 //------------------------------------------------------------------------------VOID: PARAMETROS DE ACCIÓN
   public void go() {
 //------------------------------------------------------------------------------ACCIONES DEL PROGRAMA
@@ -48,10 +49,12 @@ public class Principal extends WindowAdapter implements ActionListener{
 //------------------------------------------------------------------------------BOTONES DE PESTAÑA "ARCHIVO"    
     juegoNuevo = new MenuItem("Juego Nuevo");//--------------NOMBRAR BOTONES DE LA PESTAÑA"
     nuevaVentana = new MenuItem("Nueva Ventana");
+    puntajes = new MenuItem("Puntajes");
     salir = new MenuItem("Salir");
         
     m1.add(juegoNuevo);//------------------------METER BOTONES A LA PESTAÑA "ARCHIVO"
     m1.add(nuevaVentana);
+    m1.add(puntajes);
     m1.add(salir);
 //------------------------------------------------------------------------------BOTONES DE PESTAÑA "AYUDA"     
     verAyuda = new MenuItem("Ver Ayuda");
@@ -64,13 +67,16 @@ public class Principal extends WindowAdapter implements ActionListener{
 //------------------------------------------------------------------------------IMPLEMENTAR BOTONES ALL  
     juegoNuevo.addActionListener(this);
     nuevaVentana.addActionListener(this);
+    puntajes.addActionListener(this);
     salir.addActionListener(this);
     verAyuda.addActionListener(this);
     enviarComentarios.addActionListener(this);
-    acercaDelJuego.addActionListener(this);    
+    acercaDelJuego.addActionListener(this);  
+
   }
 //------------------------------------------------------------------------------CIERRE GO
-
+  
+  
 //------------------------------------------------------------------------------VOID: EVENTOS
     public void actionPerformed(ActionEvent ev){
         System.out.println("Opcion \"" + ev.getActionCommand() + "\" Elegida.");
@@ -82,8 +88,11 @@ public class Principal extends WindowAdapter implements ActionListener{
             case "Nueva Ventana":
                 PestañaJuego.NuevaVentana();
             break;
+            case "Puntajes":
+                PestañaJuego.Puntajes();
+            break;
             case "Salir":                
-                //PestañaArchivos.Abrir(f,ta);
+                PestañaJuego.Salir();
             break;
 //------------------------------------------------------------------------------PESTAÑA AYUDA             
             case "Ver Ayuda":
@@ -98,6 +107,16 @@ public class Principal extends WindowAdapter implements ActionListener{
         }
       
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //------------------------------------------------------------------------------VOID: BOTON CERRAR VENTANA
     public void windowClosing(WindowEvent ev){
         System.out.println("Cerrando Memorama");

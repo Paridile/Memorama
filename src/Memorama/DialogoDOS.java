@@ -6,7 +6,7 @@ package Memorama;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DialogoUNO extends Principal implements ActionListener {
+public class DialogoDOS extends Principal implements ActionListener {
 
   public static Frame f;
   public static Dialog d;
@@ -16,7 +16,7 @@ public class DialogoUNO extends Principal implements ActionListener {
   
   public static Label dl;
   public static Label d2;
-  
+
   
   public static TextField tf1;
 
@@ -35,7 +35,7 @@ public class DialogoUNO extends Principal implements ActionListener {
     tf1.addKeyListener(new NameHandler());
 
     
-    dl = new Label ("Nombre De Jugador 1");
+    dl = new Label ("Nombre De Jugador 2");
 
     d.add(dl,BorderLayout.PAGE_START);
     d.add(tf1,BorderLayout.CENTER);
@@ -68,11 +68,11 @@ public class DialogoUNO extends Principal implements ActionListener {
     }
   }
   
-  public String Nombre(){
-      String Nombre1 = "";
-      Nombre1 = tf1.getText();
-      System.out.println(Nombre1);
-      return Nombre1;      
+  public String Nombre2(){
+      String Nombre2 = "";
+      Nombre2 = tf1.getText();
+      System.out.println(Nombre2);
+      return Nombre2;      
   }
   
 }

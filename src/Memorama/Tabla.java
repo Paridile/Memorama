@@ -3,6 +3,7 @@ package Memorama;
 
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;//Control + shift + i Para importar automaticamente
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,39 +13,59 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class Tabla extends JFrame{
+      
     public Tabla(){
-        super("PUNTAJES");
+        super("Puntajes");
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Jugodor");
+        modelo.addColumn("Jugador");
         modelo.addColumn("Puntaje");
 
         this.setLocationRelativeTo(null);//-------------------------------------Centrar el Frame con respecto al componente                
+//------------------------------------------------------------------------------
+        String Jugador1="Jugador1";
+        String Jugador2="Jugador2";
+        int Puntos1 = 0;
+        int Puntos2 = 0;
         
-        Tablero Traer1 = new Tablero();//Traer Metodo 
-        int Pts= Traer1.addpuntos();  
+        DialogoUNO Traer1 = new DialogoUNO();
+        Jugador1 = Traer1.Nombre();
+        if(Jugador1.equals("")){
+            Jugador1="Jugador1";
+        }
+         
         
-        String Puntos = Integer.toString(Pts);//Convertirlo a String
+        String cadenaPuntaje= Integer.toString(Puntos1);
         
+        String cadenaPuntaje2= Integer.toString(Puntos2);
         
-        String [] JA = {"Jugador A",Puntos};
-        String [] JB = {"Jugador B","10"};
+        DialogoDOS Traer2 = new DialogoDOS();
+        Jugador2 = Traer2.Nombre2();
+        if(Jugador2.equals("")){
+            Jugador2="Jugador2";
+        }
+//------------------------------------------------------------------------------
         
-        modelo.addRow(JA);
-        modelo.addRow(JB);
+        String [] J1 = {Jugador1,cadenaPuntaje};
+        String [] J2 = {Jugador2,cadenaPuntaje2};
+        
+        modelo.addRow(J1);
+        modelo.addRow(J2);
         
         JTable tabla = new JTable(modelo);//Pasa los datos de modelo, hacia la tabla.
-        tabla.setBounds(12,12,200,200);//Cordenadas X / Y / Alto / Ancho
-        setSize(400,400);
-        add(tabla);
+        JScrollPane scroll = new JScrollPane(tabla);
+        tabla.setBounds(50,10,50,50);//Cordenadas X / Y / Alto / Ancho
+        setSize(400,400);//Tamaño Frame
+        scroll.setBounds(12,22,250,250);
+        add(scroll);
+        
+       
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//--------------------Cerrar Ventana / EXIT_ON_CLOSE
         setLayout(null);
-        setVisible(true);
-        
+        setVisible(true);  
         
     }
     public static void main (String [] a){
-         Tabla ta = new Tabla();
-         
+         Tabla ta = new Tabla();         
     }    
     
 }

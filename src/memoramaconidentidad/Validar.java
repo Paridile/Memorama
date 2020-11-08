@@ -15,34 +15,17 @@ public class Validar {
     private static BotonIdentidad b1;
     private static BotonIdentidad b2;
     
-
-
-    
-    
-//    public static void voltea() throws InterruptedException {
-//        Validar.setCount(Validar.getCount()+1);
-//        if(Validar.getCount() == 2){
-//        Validar.setCount(0);
-//                Thread.sleep(1000);
-//             Tablero.diferentes();
-//        }
-//                   
-//    }
-    
     public static boolean comparaCasillas() {
         boolean iguales = false;
         if(b1.getSimbolo().equals(b2.getSimbolo())) {
             System.out.println("Iguales");
+            iguales = true;
             b1.setInmovil(true);
             b2.setInmovil(true);
-        }
-        else{    
-                iguales = true;
+            Tablero.aumentaPuntuación();
         }
         return iguales;
-    }
-
-    
+    }    
 
     public static BotonIdentidad getB1() {
         return b1;
@@ -59,4 +42,6 @@ public class Validar {
     public static void setB2(BotonIdentidad b2) {
         Validar.b2 = b2;
     }          
+    
+    
 }

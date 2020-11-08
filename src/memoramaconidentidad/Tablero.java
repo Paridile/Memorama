@@ -5,23 +5,17 @@
  */
 package memoramaconidentidad;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -32,8 +26,14 @@ import javax.swing.text.StyledDocument;
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
-    Jugador jugador1 = new Jugador(1);
-    Jugador jugador2 = new Jugador(2);
+    private static Jugador jugador1;
+    private static Jugador jugador2;
+    private static JTextPane p1;
+    private static JTextPane p2;
+    private static JTextPane ta;
+    private static JTextPane ta2;
+    private static JTextPane t1;
+    private static JTextPane t2;
     private static BotonIdentidad[] botones;
     private final JPanel panelBotones;
     private final JPanel puntaje;
@@ -57,6 +57,14 @@ public class Tablero extends JFrame {
     private final int[] acomodoAzar = new int[36];
     
     public Tablero() {
+        jugador1 = new Jugador(true);
+        jugador2 = new Jugador(false);
+        p1 = new JTextPane();
+        p2 = new JTextPane(); 
+        ta = new JTextPane(); 
+        ta2 = new JTextPane();         
+        t1 = new JTextPane(); 
+        t2 = new JTextPane();         
         int i;
         this.setLayout(new CardLayout());
         puntaje = new JPanel();
@@ -75,22 +83,19 @@ public class Tablero extends JFrame {
         }
         Font font = new Font("Verdana", Font.BOLD, 22);        
         
-        //ta.setBackground(Color.BLUE);
-        JTextPane p1 = new JTextPane();
         p1.setEditable(false);
         p1.setFont(font);
         p1.setOpaque(false);
         p1.setText("\n" + Integer.toString(jugador1.getPuntaje()));
         centrar(p1);
         
-        JTextPane ta = new JTextPane();           
+         
         ta.setEditable(false);
         ta.setText("\nJugador 1");
         ta.setOpaque(false);
         ta.setFont(font);
         ta.setForeground(Color.BLUE);
         
-        JTextPane ta2 = new JTextPane(); 
         ta2.setEditable(false);
         ta2.setOpaque(false);
         ta2.setText("\nJugador 2");
@@ -98,23 +103,18 @@ public class Tablero extends JFrame {
         ta2.setForeground(Color.RED);
         centrar(ta);
         
-        
-        JTextPane p2 = new JTextPane();
         p2.setEditable(false);
         p2.setFont(font);
         p2.setOpaque(false);
         p2.setText("\n" + Integer.toString(jugador2.getPuntaje()));
         centrar(p2);
         
-        JTextPane t1 = new JTextPane();
         t1.setEditable(false);
         t1.setFont(font);
         t1.setForeground(Color.BLUE);
         t1.setOpaque(false);
         t1.setText("\n<-" );
 
-        
-        JTextPane t2 = new JTextPane();
         t2.setEditable(false);
         t2.setFont(font);
         t2.setForeground(Color.RED);
@@ -235,6 +235,55 @@ public class Tablero extends JFrame {
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    }
+    
+    public static void cambiaTurno() {      
+        if(jugador1.isTurno()){
+            jugador1.setTurno(false);
+            jugador2.setTurno(true);
+            t1.setText("");
+            t2.setText("\n<-");
+            
+        }
+        else if(jugador2.isTurno()){
+            jugador1.setTurno(true);
+            jugador2.setTurno(false);
+            t1.setText("\n<-");
+            t2.setText("");
+        }       
+    }
+    
+    public static void aumentaPuntuación() {
+        int total;
+        if(jugador1.isTurno()){
+            jugador1.sumaPunto();
+            
+        }
+        else if(jugador2.isTurno()){
+            jugador2.sumaPunto();
+        }   
+        escribePunto();
+        total = jugador1.getPuntaje() + jugador2.getPuntaje();
+        if(total == 18) {
+            ganador();
+        }
+    }
+    
+    public static void escribePunto(){
+        p1.setText("\n" + Integer.toString(jugador1.getPuntaje()));
+        p2.setText("\n" + Integer.toString(jugador2.getPuntaje()));
+    }
+    
+    public static void ganador() {
+        if(jugador1.getPuntaje() > jugador2.getPuntaje()){
+            JOptionPane.showMessageDialog(null, "Gana el jugador 1");
+        }
+        else if(jugador1.getPuntaje() < jugador2.getPuntaje()){
+            JOptionPane.showMessageDialog(null, "Gana el jugador 2");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Empataron");
+        }
     }
     
 }

@@ -1,24 +1,32 @@
 package memoramaconidentidad;
 
 public class Jugador {
-    private static int numero;
-    private static int puntaje;
-    private boolean turno;
+    private  int puntaje;
+    private  boolean turno;
 
-    public Jugador(int numero) {
-        this.numero = numero;
+    public Jugador(boolean turno) {
         this.puntaje = 0;
+        this.turno = turno;
     }
     
-    public static void sumaPunto() {
+    public  void sumaPunto() {
         puntaje++;
     }
 
-    public static int getPuntaje() {
+    public  int getPuntaje() {
         return puntaje;
     }
 
-    public static void setPuntaje(int puntaje) {
-        Jugador.puntaje = puntaje;
-    }       
+    public  void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }  
+
+    public  boolean isTurno() {
+        return turno;
+    }
+
+    public  void setTurno(boolean turno) {
+       this.turno = turno;
+    }
+    
 }

@@ -50,7 +50,7 @@ public class BotonIdentidad extends JButton implements ActionListener {
                 }
             }
             if (Validar.getB1() != null && Validar.getB2() != null) {
-                    Validar.setFlag(Validar.comparaCasillas());
+                    Validar.comparaCasillas();
                     Validar.setB1(null);
                     Validar.setB2(null);
             }

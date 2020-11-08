@@ -8,6 +8,7 @@ package memoramaconidentidad;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -20,13 +21,19 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 /**
  *
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
+    Jugador jugador1 = new Jugador(1);
+    Jugador jugador2 = new Jugador(2);
     private static BotonIdentidad[] botones;
     private final JPanel panelBotones;
     private final JPanel puntaje;
@@ -50,9 +57,7 @@ public class Tablero extends JFrame {
     private final int[] acomodoAzar = new int[36];
     
     public Tablero() {
-        Font font = new Font("Verdana", Font.BOLD, 12);
         int i;
-        JTextPane ta = new JTextPane();
         this.setLayout(new CardLayout());
         puntaje = new JPanel();
         puntaje.setSize(800, 100);
@@ -68,24 +73,61 @@ public class Tablero extends JFrame {
             //botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
             panelBotones.add(botones[i]);
         }
-        JPanel xd = new JPanel();
-        JPanel xd2 = new JPanel();
-        JPanel xd3 = new JPanel();
-        JPanel xd4 = new JPanel();
-        panelBotones.add(ta);
-        ta.setText("\n\n:O");
-        ta.setFont(font);
-        ta.setForeground(Color.white);
-        ta.setBackground(Color.BLUE);
+        Font font = new Font("Verdana", Font.BOLD, 22);        
         
-        JTextPane ta2 = new JTextPane();
-                panelBotones.add(xd);
-                panelBotones.add(xd2);
-                panelBotones.add(xd3);
-                panelBotones.add(xd4);
-        panelBotones.add(ta2);      
-        ta2.setText("xdd");
-        ta2.setBackground(Color.red);
+        //ta.setBackground(Color.BLUE);
+        JTextPane p1 = new JTextPane();
+        p1.setEditable(false);
+        p1.setFont(font);
+        p1.setOpaque(false);
+        p1.setText("\n" + Integer.toString(jugador1.getPuntaje()));
+        centrar(p1);
+        
+        JTextPane ta = new JTextPane();           
+        ta.setEditable(false);
+        ta.setText("\nJugador 1");
+        ta.setOpaque(false);
+        ta.setFont(font);
+        ta.setForeground(Color.BLUE);
+        
+        JTextPane ta2 = new JTextPane(); 
+        ta2.setEditable(false);
+        ta2.setOpaque(false);
+        ta2.setText("\nJugador 2");
+        ta2.setFont(font);
+        ta2.setForeground(Color.RED);
+        centrar(ta);
+        
+        
+        JTextPane p2 = new JTextPane();
+        p2.setEditable(false);
+        p2.setFont(font);
+        p2.setOpaque(false);
+        p2.setText("\n" + Integer.toString(jugador2.getPuntaje()));
+        centrar(p2);
+        
+        JTextPane t1 = new JTextPane();
+        t1.setEditable(false);
+        t1.setFont(font);
+        t1.setForeground(Color.BLUE);
+        t1.setOpaque(false);
+        t1.setText("\n<-" );
+
+        
+        JTextPane t2 = new JTextPane();
+        t2.setEditable(false);
+        t2.setFont(font);
+        t2.setForeground(Color.RED);
+        t2.setOpaque(false);
+        t2.setText("\n" );
+        t2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+                panelBotones.add(ta);
+                panelBotones.add(p1);
+                panelBotones.add(t1);
+                panelBotones.add(t2);
+                panelBotones.add(p2);
+        panelBotones.add(ta2);  
+        
 
         
         
@@ -164,17 +206,7 @@ public class Tablero extends JFrame {
             System.exit(0);
 	}
     }
-    
-     
-    public static void inmoviliza(String simbolo) {
-        
-        for(BotonIdentidad b:botones){
-            if(b.getSimbolo() == simbolo) {
-                b.setInmovil(true);
-            }
-        }
-    }
-    
+             
     
     public static boolean diferentes() {
        int i=0;
@@ -196,6 +228,13 @@ public class Tablero extends JFrame {
 
         }
             return impar;    
+    }
+    
+    public static void centrar(JTextPane ta) {
+        StyledDocument doc = ta.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
     }
     
 }

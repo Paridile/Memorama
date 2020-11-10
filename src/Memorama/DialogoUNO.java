@@ -36,7 +36,7 @@ public class DialogoUNO extends Principal implements ActionListener {
 
     
     dl = new Label ("Nombre De Jugador 1");
-
+    d.setLocationRelativeTo(null); 
     d.add(dl,BorderLayout.PAGE_START);
     d.add(tf1,BorderLayout.CENTER);
     

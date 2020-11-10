@@ -3,6 +3,7 @@ package Memorama;
  *
  * @author Aarón
  */
+import static Memorama.DialogoUNO.d;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -28,7 +29,7 @@ public class DialogoDOS extends Principal implements ActionListener {
     dp.setLayout(new FlowLayout());
     
     db1 = new Button("¡¡¡Listo!!!");
-    
+    d.setLocationRelativeTo(null); 
     dp.add(db1);
     
     tf1 = new TextField("", 2);

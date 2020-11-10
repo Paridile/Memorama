@@ -13,17 +13,23 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class Tabla extends JFrame{
-      
+    
+    private static int pts;
+    private static int pts2;
+    private static String Jugador1;
+    private static String Jugador2;
+    public static DefaultTableModel modelo;
+    
     public Tabla(){
         super("Puntajes");
-        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel();
         modelo.addColumn("Jugador");
         modelo.addColumn("Puntaje");
+        pts=0;
+        pts2=0;
 
         this.setLocationRelativeTo(null);//-------------------------------------Centrar el Frame con respecto al componente                
 //------------------------------------------------------------------------------
-        String Jugador1="Jugador1";
-        String Jugador2="Jugador2";
         int Puntos1 = 0;
         int Puntos2 = 0;
         
@@ -33,8 +39,7 @@ public class Tabla extends JFrame{
             Jugador1="Jugador1";
         }
         
-          int pts=0;
-          int pts2=0;
+          
           
         pts = Tablero.Puntaje1(Puntos1);
         pts2 = Tablero.Puntaje2(Puntos2);
@@ -68,7 +73,22 @@ public class Tabla extends JFrame{
         setLayout(null);
         setVisible(true);  
         
+        
     }
+    
+    public static void sumaPuntoTabla() {
+        pts = Tablero.jugador1.getPuntaje();
+        pts2= Tablero.jugador2.getPuntaje();
+        String [] j1;
+        String [] j2;
+        j1=new String[] {Jugador1,String.valueOf(pts)};
+        j2=new String[] {Jugador2,String.valueOf(pts2)};
+        modelo.removeRow(0);
+        modelo.removeRow(1);
+        modelo.addRow(j1);
+        modelo.addRow(j2);
+    }
+    
     public static void main (String [] a){
          Tabla ta = new Tabla();         
     }    

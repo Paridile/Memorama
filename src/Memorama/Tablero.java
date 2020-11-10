@@ -26,8 +26,9 @@ import javax.swing.text.StyledDocument;
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
-    private static Jugador jugador1;
-    private static Jugador jugador2;
+    public static Jugador jugador1;
+    public static Jugador jugador2;
+    private static boolean juegoAbierto;
     private static JTextPane p1;
     private static JTextPane p2;
     private static JTextPane ta;
@@ -36,7 +37,6 @@ public class Tablero extends JFrame {
     private static JTextPane t2;
     private static BotonDestapar[] botones;
     private final JPanel panelBotones;
-    private final JPanel puntaje;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
                                        "A4_Lema", "A5_Himno", "B1_EstandarteICL",
                                        "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
@@ -57,6 +57,7 @@ public class Tablero extends JFrame {
     private final int[] acomodoAzar = new int[36];
     
     public Tablero() {
+        this.setTitle("Memorama UAEMex");
         jugador1 = new Jugador(true);
         jugador2 = new Jugador(false);
         p1 = new JTextPane();
@@ -67,18 +68,15 @@ public class Tablero extends JFrame {
         t2 = new JTextPane();         
         int i;
         this.setLayout(new CardLayout());
-        puntaje = new JPanel();
-        puntaje.setSize(800, 100);
-        puntaje.setBackground(Color.red);
         botones = new BotonDestapar[36];
         panelBotones = new JPanel();
         panelBotones.setLayout(new GridLayout(7, 6, 2, 2));
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
             //para un acomodo predeterminado
-            botones[i] = new BotonDestapar(simbolos[acomodoPredeterminado[i]]);
+            //botones[i] = new BotonDestapar(simbolos[acomodoPredeterminado[i]]);
             //para un acomodo al azar
-            //botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
+            botones[i] = new BotonDestapar(simbolos[acomodoAzar[i]]);
             panelBotones.add(botones[i]);
         }
         Font font = new Font("Verdana", Font.BOLD, 22);        
@@ -151,6 +149,7 @@ public class Tablero extends JFrame {
         
     }
     
+    
     public void generaAcomodoAzar1() {
         int i, valor;
         int []indicesAcomodo = new int[18];
@@ -217,6 +216,7 @@ public class Tablero extends JFrame {
             System.out.println("Cerrando Memorama");
             panelBotones.setVisible (false);
             dispose(); 
+            setJuegoAbierto(false);
 	}
     }
              
@@ -319,6 +319,15 @@ public class Tablero extends JFrame {
       Puntaje2 = jugador2.getPuntaje(); 
       return Puntaje2;
   }
+
+    public static boolean isJuegoAbierto() {
+        return juegoAbierto;
+    }
+
+    public static void setJuegoAbierto(boolean juegoAbierto) {
+        Tablero.juegoAbierto = juegoAbierto;
+    }
+   
     
     
 }

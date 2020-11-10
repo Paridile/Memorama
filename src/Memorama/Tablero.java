@@ -103,14 +103,14 @@ public class Tablero extends JFrame {
 //------------------------------------------------------------------------------        
         
         ta.setEditable(false);
-        ta.setText(Jugador1);
+        ta.setText("\n"+Jugador1);
         ta.setOpaque(false);
         ta.setFont(font);
         ta.setForeground(Color.BLUE);
         
         ta2.setEditable(false);
         ta2.setOpaque(false);
-        ta2.setText(Jugador2);
+        ta2.setText("\n"+Jugador2);
         ta2.setFont(font);
         ta2.setForeground(Color.RED);
         centrar(ta);
@@ -309,17 +309,15 @@ public class Tablero extends JFrame {
         }
     }
     
-    public int Puntaje1(){
+    public static int Puntaje1(int PuntajeJ1){
       int Puntaje1 = 0;
       Puntaje1 = jugador1.getPuntaje();
-      System.out.println(Puntaje1);
-      return Puntaje1;      
+      return Puntaje1;
     }
-    public int Puntaje2(){
+    public static int Puntaje2(int PuntajeJ2){
       int Puntaje2 = 0;
-      Puntaje2 = jugador2.getPuntaje();
-      System.out.println(Puntaje2);
-      return Puntaje2;      
+      Puntaje2 = jugador2.getPuntaje(); 
+      return Puntaje2;
   }
     
     

@@ -17,8 +17,7 @@ public class Principal extends WindowAdapter implements ActionListener{
     private MenuItem puntajes;
     private MenuItem salir;
 //------------------------------------------------------------------------------BOTONES DE LA PESTAÑA 2: AYUDA  
-    private MenuItem verAyuda;
-    private MenuItem enviarComentarios;
+    private MenuItem creadores;
     private MenuItem acercaDelJuego;   
     
 //------------------------------------------------------------------------------MAIN DE EJECUCIÓN
@@ -50,6 +49,7 @@ public class Principal extends WindowAdapter implements ActionListener{
     juegoNuevo = new MenuItem("Juego Nuevo");//--------------NOMBRAR BOTONES DE LA PESTAÑA"
     nuevaVentana = new MenuItem("Nueva Ventana");
     puntajes = new MenuItem("Puntajes");
+    puntajes.setEnabled(false);
     salir = new MenuItem("Salir");
         
     m1.add(juegoNuevo);//------------------------METER BOTONES A LA PESTAÑA "ARCHIVO"
@@ -57,21 +57,19 @@ public class Principal extends WindowAdapter implements ActionListener{
     m1.add(puntajes);
     m1.add(salir);
 //------------------------------------------------------------------------------BOTONES DE PESTAÑA "AYUDA"     
-    verAyuda = new MenuItem("Ver Ayuda");
-    enviarComentarios = new MenuItem("Enviar Comentarios");
+    creadores = new MenuItem("Creadores");
     acercaDelJuego = new MenuItem("Acerca Del Juego");
     
-    m2.add(verAyuda);//------------------------METER BOTONES A LA PESTAÑA "AYUDA"
-    m2.add(enviarComentarios);
+    m2.add(creadores);
     m2.add(acercaDelJuego);
 //------------------------------------------------------------------------------IMPLEMENTAR BOTONES ALL  
     juegoNuevo.addActionListener(this);
     nuevaVentana.addActionListener(this);
     puntajes.addActionListener(this);
     salir.addActionListener(this);
-    verAyuda.addActionListener(this);
-    enviarComentarios.addActionListener(this);
+    creadores.addActionListener(this);
     acercaDelJuego.addActionListener(this);  
+    m1.addActionListener(this);
 
   }
 //------------------------------------------------------------------------------CIERRE GO
@@ -83,7 +81,8 @@ public class Principal extends WindowAdapter implements ActionListener{
         switch(ev.getActionCommand()){
 //------------------------------------------------------------------------------PESTAÑA JUEGO            
             case "Juego Nuevo":
-            PestañaJuego.Nuevo();           
+            PestañaJuego.Nuevo();     
+            puntajes.setEnabled(true);
             break;
             case "Nueva Ventana":
                 PestañaJuego.NuevaVentana();
@@ -95,15 +94,12 @@ public class Principal extends WindowAdapter implements ActionListener{
                 PestañaJuego.Salir();
             break;
 //------------------------------------------------------------------------------PESTAÑA AYUDA             
-            case "Ver Ayuda":
-                //PestañaArchivos.Guardar(ta);//Falta comparar INCOMPLETO
+            case "Creadores":
+                PestañaJuego.Creadores();
             break;
-            case "Enviar Comentarios":
-                //PestañaArchivos.GuardarComo(ta);
-            break;
-            case "Acera Del Juego":
-                //Instrucciones.nuevo(ta);//INCOMPLETO
-            break;            
+            case "Acerca Del Juego":
+                PestañaJuego.AcercaDelJuego();
+            break;                 
         }
       
     }

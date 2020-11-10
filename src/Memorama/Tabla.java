@@ -32,11 +32,16 @@ public class Tabla extends JFrame{
         if(Jugador1.equals("")){
             Jugador1="Jugador1";
         }
-         
         
-        String cadenaPuntaje= Integer.toString(Puntos1);
+          int pts=0;
+          int pts2=0;
+          
+        pts = Tablero.Puntaje1(Puntos1);
+        pts2 = Tablero.Puntaje2(Puntos2);
+
+        String cadenaPuntaje = String.valueOf(pts);
         
-        String cadenaPuntaje2= Integer.toString(Puntos2);
+        String cadenaPuntaje2 = String.valueOf(pts2);
         
         DialogoDOS Traer2 = new DialogoDOS();
         Jugador2 = Traer2.Nombre2();

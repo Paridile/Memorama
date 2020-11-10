@@ -4,15 +4,21 @@ import java.awt.TextArea;
 import javax.swing.JOptionPane;
 
 public class PestañaJuego {
+    static int flag = 0; 
 //------------------------------------------------------------------------------JUEGO
-    public static void Nuevo(){                           
+    public static void Nuevo(){   
+       if (flag != 0 ){
+       JOptionPane.showMessageDialog (null, "Aplicacion en ejecución", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+       else{
         System.out.println("Configuraciones Juego Nuevo");  
         DialogoUNO Dialogo = new DialogoUNO();
         Dialogo.go();
         DialogoDOS Dialogo2 = new DialogoDOS();
         Dialogo2.go();
         new Tablero();
-        
+        flag = 1; 
+       }
     }
     
 //------------------------------------------------------------------------------NUEVA VENTANA

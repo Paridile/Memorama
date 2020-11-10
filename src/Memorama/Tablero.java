@@ -76,7 +76,7 @@ public class Tablero extends JFrame {
             //para un acomodo predeterminado
             //botones[i] = new BotonDestapar(simbolos[acomodoPredeterminado[i]]);
             //para un acomodo al azar
-            botones[i] = new BotonDestapar(simbolos[acomodoAzar[i]]);
+            botones[i] = new BotonDestapar(simbolos[acomodoAzar[i]]); 
             panelBotones.add(botones[i]);
         }
         Font font = new Font("Verdana", Font.BOLD, 22);        

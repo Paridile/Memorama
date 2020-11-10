@@ -1,4 +1,4 @@
-package memoramaconidentidad;
+package Memorama;
 
 public class Jugador {
     private  int puntaje;

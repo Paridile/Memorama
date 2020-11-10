@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package memoramaconidentidad;
+package Memorama;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -26,17 +21,17 @@ import javax.swing.text.StyledDocument;
  * @author LABIAALAP1
  */
 public class Tablero extends JFrame {
-    private static Jugador jugador1;
-    private static Jugador jugador2;
+    public static Jugador jugador1;
+    public static Jugador jugador2;
+    private static boolean juegoAbierto;
     private static JTextPane p1;
     private static JTextPane p2;
     private static JTextPane ta;
     private static JTextPane ta2;
     private static JTextPane t1;
     private static JTextPane t2;
-    private static BotonIdentidad[] botones;
+    private static BotonDestapar[] botones;
     private final JPanel panelBotones;
-    private final JPanel puntaje;
     private final String[] simbolos = {"A1_Escudo", "A2_Estandarte", "A3_Bandera",
                                        "A4_Lema", "A5_Himno", "B1_EstandarteICL",
                                        "B2_EstandarteICLAEdoMex", "C1_ArbolMora",
@@ -57,6 +52,7 @@ public class Tablero extends JFrame {
     private final int[] acomodoAzar = new int[36];
     
     public Tablero() {
+        this.setTitle("Memorama UAEMex");
         jugador1 = new Jugador(true);
         jugador2 = new Jugador(false);
         p1 = new JTextPane();
@@ -67,18 +63,15 @@ public class Tablero extends JFrame {
         t2 = new JTextPane();         
         int i;
         this.setLayout(new CardLayout());
-        puntaje = new JPanel();
-        puntaje.setSize(800, 100);
-        puntaje.setBackground(Color.red);
-        botones = new BotonIdentidad[36];
+        botones = new BotonDestapar[36];
         panelBotones = new JPanel();
         panelBotones.setLayout(new GridLayout(7, 6, 2, 2));
         generaAcomodoAzar2();
         for(i = 0; i < 36; i++) {
             //para un acomodo predeterminado
-            botones[i] = new BotonIdentidad(simbolos[acomodoPredeterminado[i]]);
+            //botones[i] = new BotonDestapar(simbolos[acomodoPredeterminado[i]]);
             //para un acomodo al azar
-            //botones[i] = new BotonIdentidad(simbolos[acomodoAzar[i]]);
+            botones[i] = new BotonDestapar(simbolos[acomodoAzar[i]]); 
             panelBotones.add(botones[i]);
         }
         Font font = new Font("Verdana", Font.BOLD, 22);        
@@ -88,17 +81,29 @@ public class Tablero extends JFrame {
         p1.setOpaque(false);
         p1.setText("\n" + Integer.toString(jugador1.getPuntaje()));
         centrar(p1);
+//------------------------------------------------------------------------------        
+        DialogoUNO Traer1 = new DialogoUNO();
+        String Jugador1 = Traer1.Nombre();
+        if(Jugador1.equals("")){
+            Jugador1="Jugador1";
+        }
         
-         
+        DialogoDOS Traer2 = new DialogoDOS();
+        String Jugador2 = Traer2.Nombre2();
+        if(Jugador2.equals("")){
+            Jugador2="Jugador2";
+        }
+//------------------------------------------------------------------------------        
+        
         ta.setEditable(false);
-        ta.setText("\nJugador 1");
+        ta.setText("\n"+Jugador1);
         ta.setOpaque(false);
         ta.setFont(font);
         ta.setForeground(Color.BLUE);
         
         ta2.setEditable(false);
         ta2.setOpaque(false);
-        ta2.setText("\nJugador 2");
+        ta2.setText("\n"+Jugador2);
         ta2.setFont(font);
         ta2.setForeground(Color.RED);
         centrar(ta);
@@ -138,6 +143,7 @@ public class Tablero extends JFrame {
         setVisible(true);
         
     }
+    
     
     public void generaAcomodoAzar1() {
         int i, valor;
@@ -202,8 +208,10 @@ public class Tablero extends JFrame {
     
     class CierraVentana extends WindowAdapter {
         public void windowClosing(WindowEvent e) {
-            dispose();
-            System.exit(0);
+            System.out.println("Cerrando Memorama");
+            panelBotones.setVisible (false);
+            dispose(); 
+            setJuegoAbierto(false);
 	}
     }
              
@@ -211,14 +219,14 @@ public class Tablero extends JFrame {
     public static boolean diferentes() {
        int i=0;
        boolean impar=false;
-       for(BotonIdentidad b:botones){
+       for(BotonDestapar b:botones){
             if(!b.isInmovil() && b.isDestapado()) {
                 i++;
             }
             
         }
         if(i>=2){
-            for(BotonIdentidad b:botones){
+            for(BotonDestapar b:botones){
             if(!b.isInmovil() && b.isDestapado()) {
                 b.tapar();
                 impar=true;
@@ -276,15 +284,45 @@ public class Tablero extends JFrame {
     
     public static void ganador() {
         if(jugador1.getPuntaje() > jugador2.getPuntaje()){
-            JOptionPane.showMessageDialog(null, "Gana el jugador 1");
+            DialogoUNO Traer1 = new DialogoUNO();
+            String Jugador1 = Traer1.Nombre();
+            if(Jugador1.equals("")){
+                Jugador1="Jugador1";
+            }
+            JOptionPane.showMessageDialog(null, "Gana "+Jugador1);
         }
         else if(jugador1.getPuntaje() < jugador2.getPuntaje()){
-            JOptionPane.showMessageDialog(null, "Gana el jugador 2");
+            DialogoDOS Traer2 = new DialogoDOS();
+            String Jugador2 = Traer2.Nombre2();
+            if(Jugador2.equals("")){
+                Jugador2="Jugador2";
+            }
+            JOptionPane.showMessageDialog(null, "Gana "+Jugador2);
         }
         else{
             JOptionPane.showMessageDialog(null, "Empataron");
         }
     }
     
-}
+    public static int Puntaje1(int PuntajeJ1){
+      int Puntaje1 = 0;
+      Puntaje1 = jugador1.getPuntaje();
+      return Puntaje1;
+    }
+    public static int Puntaje2(int PuntajeJ2){
+      int Puntaje2 = 0;
+      Puntaje2 = jugador2.getPuntaje(); 
+      return Puntaje2;
+  }
 
+    public static boolean isJuegoAbierto() {
+        return juegoAbierto;
+    }
+
+    public static void setJuegoAbierto(boolean juegoAbierto) {
+        Tablero.juegoAbierto = juegoAbierto;
+    }
+   
+    
+    
+}
